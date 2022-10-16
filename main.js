@@ -26,7 +26,7 @@ $('#buscador').keyup(function () {
 
     $.ajax({
         type: "GET",
-        url: "http://localhost:9000/api/buscador/" + busqueda,
+        url: "https://serverbsale.herokuapp.com/api/buscador/" + busqueda,
         data: "",
         dataType: "json",
     }).done( (response) => {
@@ -56,7 +56,7 @@ $('#buscador').keyup(function () {
 function getProductos() {
     $.ajax({
         type: "GET",
-        url: "http://localhost:9000/api/productos",
+        url: "https://serverbsale.herokuapp.com/api/productos",
         data: "",
         dataType: "json"
     }).done( (response) => {
@@ -86,7 +86,7 @@ function getProductosByCategoria(id) {
     
     $.ajax({
         type: "GET",
-        url: "http://localhost:9000/api/busquedaByCategorias/" + id,
+        url: "https://serverbsale.herokuapp.com/api/busquedaByCategorias/" + id,
         data: "",
         dataType: "json",
     }).done( (response) => {
@@ -124,7 +124,7 @@ function getProductosByOrden(orden, categoria) {
     
     $.ajax({
         type: "GET",
-        url: "http://localhost:9000/api/ordenarProducto/" + orden + "/" + categoria,
+        url: "https://serverbsale.herokuapp.com/api/ordenarProducto/" + orden + "/" + categoria,
         data: "",
         dataType: "json",
     }).done( (response) => {
@@ -162,7 +162,7 @@ function getCategorias() {
 
     $.ajax({
         type: "GET",
-        url: "http://localhost:9000/api/categorias",
+        url: "https://serverbsale.herokuapp.com/api/categorias",
         data: "",
         dataType: "json",
     }).done( (response) => {
