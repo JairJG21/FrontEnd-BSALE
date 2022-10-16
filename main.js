@@ -18,6 +18,7 @@ $('#selectOrden').on('change', () => {
 
 $('#buscador').keyup(function () { 
     let busqueda = $('#buscador').val();
+    let orden = $('#selectOrden').val();
 
     if(busqueda == '' || null) {
         busqueda = '-';
@@ -26,7 +27,7 @@ $('#buscador').keyup(function () {
 
     $.ajax({
         type: "GET",
-        url: "https://serverbsale.herokuapp.com/api/buscador/" + busqueda,
+        url: "https://serverbsale.herokuapp.com/api/buscador/"+busqueda+"/"+orden,
         data: "",
         dataType: "json",
     }).done( (response) => {
