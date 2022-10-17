@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready( () => {
 
     getProductos();
     getCategorias();
@@ -16,9 +16,8 @@ $('#selectOrden').on('change', () => {
     getProductosByOrden(orden, categoria);
 });
 
-$('#buscador').keyup(function () { 
+$('#buscador').keyup( () => { 
     let busqueda = $('#buscador').val();
-    let orden = $('#selectOrden').val();
 
     if(busqueda == '' || null) {
         busqueda = '-';
@@ -27,7 +26,7 @@ $('#buscador').keyup(function () {
 
     $.ajax({
         type: "GET",
-        url: "https://serverbsale.herokuapp.com/api/buscador/"+busqueda+"/"+orden,
+        url: "https://serverbsale.herokuapp.com/api/buscador/" + busqueda,
         data: "",
         dataType: "json",
     }).done( (response) => {
@@ -39,7 +38,7 @@ $('#buscador').keyup(function () {
 
                 data += `<div class="card" style="width: 18rem;">
                             <img src="${item.url_image}" class="card-img-top">
-                                    <div class="card-body">
+                                    <div class="card-body d-flex flex-column text-center">
                                     <h5 class="card-title">${item.name}</h5>
                                     <h6 class="card-subtitle mb-2 text-muted">$${item.price}</h6>
                                     <a href="#" class="btn btn-primary">Agregar</a>
@@ -50,11 +49,14 @@ $('#buscador').keyup(function () {
 
             $('.card-img-top').addClass('img_product');
             $('.card').addClass('mt-3 me-3 ms-3');
+
+            bloquearSelect();
     })
 
 });
 
 function getProductos() {
+
     $.ajax({
         type: "GET",
         url: "https://serverbsale.herokuapp.com/api/productos",
@@ -68,8 +70,8 @@ function getProductos() {
             $.each(response, function (i, item) {
 
                 data += `<div class="card" style="width: 18rem;">
-                            <img src="${item.url_image}" class="card-img-top">
-                                    <div class="card-body">
+                             <img src="${item.url_image}" class="card-img-top">
+                                <div class="card-body d-flex flex-column text-center">
                                     <h5 class="card-title">${item.name}</h5>
                                     <h6 class="card-subtitle mb-2 text-muted">$${item.price}</h6>
                                     <a href="#" class="btn btn-primary carrito">Agregar</a>
@@ -100,7 +102,7 @@ function getProductosByCategoria(id) {
 
                 data += `<div class="card" style="width: 18rem;">
                             <img src="${item.url_image}" class="card-img-top">
-                                    <div class="card-body">
+                                    <div class="card-body d-flex flex-column text-center">
                                     <h5 class="card-title">${item.name}</h5>
                                     <h6 class="card-subtitle mb-2 text-muted">$${item.price}</h6>
                                     <a href="#" class="btn btn-primary">Agregar</a>
@@ -138,7 +140,7 @@ function getProductosByOrden(orden, categoria) {
 
                 data += `<div class="card" style="width: 18rem;">
                             <img src="${item.url_image}" class="card-img-top">
-                                    <div class="card-body">
+                                    <div class="card-body d-flex flex-column text-center">
                                     <h5 class="card-title">${item.name}</h5>
                                     <h6 class="card-subtitle mb-2 text-muted">$${item.price}</h6>
                                     <a href="#" class="btn btn-primary">Agregar</a>
@@ -181,4 +183,17 @@ function getCategorias() {
             $('.list-group-item').css('cursor', 'pointer');
     })
 
+}
+
+function bloquearSelect() {
+
+    let buscador = $('#buscador').val();
+
+    if(buscador != '' || null) {
+        $('#selectOrden').prop('disabled', true);
+        $('#selectCategorias').prop('disabled', true);
+    } else {
+        $('#selectOrden').prop('disabled', false);
+        $('#selectCategorias').prop('disabled', false);
+    }
 }
