@@ -52,7 +52,6 @@ $('#buscador').keyup( () => {
 
             bloquearSelect();
     })
-
 });
 
 function getProductos() {
